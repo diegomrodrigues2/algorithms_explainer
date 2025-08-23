@@ -69,9 +69,13 @@ import MinCostTreeColoringVisualizer from './components/MinCostTreeColoringVisua
 import MinCostTreeColoringExplanation from './components/MinCostTreeColoringExplanation';
 import LargestBSTSubtreeVisualizer from './components/LargestBSTSubtreeVisualizer';
 import LargestBSTSubtreeExplanation from './components/LargestBSTSubtreeExplanation';
+import ActivitySelectionVisualizer from './components/ActivitySelectionVisualizer';
+import ActivitySelectionExplanation from './components/ActivitySelectionExplanation';
+import HuffmanCodeVisualizer from './components/HuffmanCodeVisualizer';
+import HuffmanCodeExplanation from './components/HuffmanCodeExplanation';
 
 
-type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree';
+type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes';
 
 interface AlgorithmInfo {
     id: Algorithm;
@@ -118,6 +122,10 @@ const ALGORITHM_CATEGORIES: { [key: string]: AlgorithmInfo[] } = {
     { id: 'diametertree', name: '🌳 Diâmetro da Árvore' },
     { id: 'mincosttreecoloring', name: '🎨 Coloração de Árvore (Custo Mínimo)' },
     { id: 'largestbstsubtree', name: '🌳 Maior Subárvore BST' },
+  ],
+  'Algoritmos Gulosos': [
+    { id: 'activityselection', name: '⏱️ Escalonamento de Atividades' },
+    { id: 'huffmancodes', name: '🗜️ Códigos de Huffman' },
   ]
 };
 
@@ -160,6 +168,8 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'diametertree' && <DiameterTreeVisualizer />}
         {algorithm === 'mincosttreecoloring' && <MinCostTreeColoringVisualizer />}
         {algorithm === 'largestbstsubtree' && <LargestBSTSubtreeVisualizer />}
+        {algorithm === 'activityselection' && <ActivitySelectionVisualizer />}
+        {algorithm === 'huffmancodes' && <HuffmanCodeVisualizer />}
       </div>
       <div className="lg:col-span-2">
         {algorithm === 'hanoi' && <Explanation />}
@@ -196,6 +206,8 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'diametertree' && <DiameterTreeExplanation />}
         {algorithm === 'mincosttreecoloring' && <MinCostTreeColoringExplanation />}
         {algorithm === 'largestbstsubtree' && <LargestBSTSubtreeExplanation />}
+        {algorithm === 'activityselection' && <ActivitySelectionExplanation />}
+        {algorithm === 'huffmancodes' && <HuffmanCodeExplanation />}
       </div>
     </div>
   );

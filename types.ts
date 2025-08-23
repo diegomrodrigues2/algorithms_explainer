@@ -22,12 +22,14 @@ export interface AlgorithmStep {
 
 // Types for Quickselect
 export type QuickselectHighlightType =
-  | 'search'
-  | 'pivot'
-  | 'compare'
-  | 'less'
-  | 'final'
-  | 'found';
+  | 'search'          // The current subarray being searched
+  | 'pivot'           // The chosen pivot element
+  | 'compare'         // The element currently being compared to the pivot
+  | 'less'            // Elements confirmed to be smaller than the pivot
+  | 'greater'         // Elements confirmed to be greater than or equal to the pivot
+  | 'storeIndex'      // The special pointer marking the boundary of the 'less' partition
+  | 'final-pivot'     // The pivot in its final sorted position for the partition
+  | 'found';          // The k-th element when it's found
 
 export interface QuickselectAlgorithmStep {
     array: number[];
@@ -642,4 +644,60 @@ export interface LargestBSTSubtreeAlgorithmStep {
     highlights: { [nodeId: number]: LargestBSTSubtreeHighlightType };
     message: string;
     result: number | null; // final largest BST size
+}
+
+// Types for Activity Selection
+export interface Activity {
+  id: number;
+  start: number;
+  end: number;
+  originalIndex: number;
+}
+
+export type ActivityHighlightType = 'considering' | 'selected' | 'rejected';
+
+export interface ActivitySelectionAlgorithmStep {
+  activities: Activity[];
+  highlights: { [id: number]: ActivityHighlightType };
+  selectedActivities: Activity[];
+  lastEndTime: number;
+  message: string;
+  isSorted: boolean;
+}
+
+// Types for Huffman Codes
+export interface HuffmanNodeData {
+    id: string;
+    freq: number;
+    symbol: string | null;
+    level: number;
+    x: number;
+    y: number;
+    leftId?: string | null;
+    rightId?: string | null;
+    parentX?: number;
+    parentY?: number;
+}
+
+export interface HuffmanTree {
+    [key: string]: HuffmanNodeData;
+}
+
+export interface HeapNode {
+    id: string;
+    freq: number;
+    symbol: string | null;
+}
+
+export interface HuffmanCodeAlgorithmStep {
+    heap: HeapNode[];
+    tree: HuffmanTree;
+    codes: { [symbol: string]: string };
+    message: string;
+    highlights: {
+        heapIds?: string[];
+        treeId?: string;
+        path?: string;
+    };
+    codeGenerationPath: { symbol: string, code: string }[];
 }
