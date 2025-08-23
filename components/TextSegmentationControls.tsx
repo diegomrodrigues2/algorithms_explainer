@@ -1,0 +1,111 @@
+import React from 'react';
+import { PlayIcon, PauseIcon, ResetIcon } from './Icons';
+
+interface ControlsProps {
+    text: string;
+    onTextChange: (value: string) => void;
+    dictionary: string;
+    onDictionaryChange: (value: string) => void;
+    speed: number;
+    onSpeedChange: (value: number) => void;
+    isPlaying: boolean;
+    onPlayPause: () => void;
+    onReset: () => void;
+    foundSolution: string[] | null;
+}
+
+const TextSegmentationControls = ({
+  text,
+  onTextChange,
+  dictionary,
+  onDictionaryChange,
+  speed,
+  onSpeedChange,
+  isPlaying,
+  onPlayPause,
+  onReset,
+  foundSolution
+}: ControlsProps) => {
+  return (
+    <div className="bg-slate-800 p-4 rounded-lg shadow-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+        <div className="space-y-2">
+          <label htmlFor="text-input" className="block text-sm font-medium text-slate-300">
+            String de Entrada (sem espaços)
+          </label>
+          <input
+            id="text-input"
+            type="text"
+            value={text}
+            onChange={(e) => onTextChange(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
+            placeholder="ex: algoritmosdivertidos"
+            disabled={isPlaying}
+          />
+        </div>
+
+        <div className="space-y-2">
+           <label htmlFor="dictionary-input" className="block text-sm font-medium text-slate-300">
+            Dicionário (separado por vírgula)
+          </label>
+          <input
+            id="dictionary-input"
+            type="text"
+            value={dictionary}
+            onChange={(e) => onDictionaryChange(e.target.value)}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50"
+             placeholder="ex: algoritmos,divertidos"
+            disabled={isPlaying}
+          />
+        </div>
+        
+        <div className="col-span-full space-y-2">
+          <label htmlFor="speed" className="block text-sm font-medium text-slate-300">
+            Velocidade da Animação
+          </label>
+          <input
+            id="speed"
+            type="range"
+            min="10"
+            max="1000"
+            value={speed}
+            onChange={(e) => onSpeedChange(Number(e.target.value))}
+            className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+          />
+        </div>
+      </div>
+      
+      <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onPlayPause}
+            className="flex items-center justify-center w-12 h-12 bg-cyan-500 text-white rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-cyan-500 transition-transform transform hover:scale-110"
+            aria-label={isPlaying ? 'Pausar' : 'Iniciar'}
+          >
+            {isPlaying ? <PauseIcon /> : <PlayIcon />}
+          </button>
+          <button
+            onClick={onReset}
+            className="flex items-center justify-center w-12 h-12 bg-slate-600 text-white rounded-full hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-slate-500 transition-transform transform hover:scale-110"
+            aria-label="Reiniciar"
+          >
+            <ResetIcon />
+          </button>
+        </div>
+        <div className="text-center sm:text-right bg-slate-900/50 p-3 rounded-lg flex-grow">
+            {foundSolution ? (
+                 <p className="text-lg font-semibold text-slate-200">
+                    Solução: <span className="font-mono text-emerald-400 text-xl break-all">[{foundSolution.join(', ')}]</span>
+                </p>
+            ) : (
+                <p className="text-lg font-semibold text-slate-400">
+                    Buscando solução...
+                </p>
+            )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TextSegmentationControls;

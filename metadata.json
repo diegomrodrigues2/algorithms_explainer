@@ -1,0 +1,6 @@
+{
+  "name": "Torre de Hanoi: Visualizador Recursivo",
+  "description": "Uma aplicação web interativa para visualizar e entender o clássico problema da Torre de Hanoi, demonstrando os princípios da recursão e da 'fé recursiva'.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
