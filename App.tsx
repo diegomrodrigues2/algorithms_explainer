@@ -89,9 +89,11 @@ import LSMTreeVisualizer from './components/LSMTreeVisualizer';
 import LSMTreeExplanation from './components/LSMTreeExplanation';
 import BloomFilterVisualizer from './components/BloomFilterVisualizer';
 import BloomFilterExplanation from './components/BloomFilterExplanation';
+import BTreeVisualizer from './components/BTreeVisualizer';
+import BTreeExplanation from './components/BTreeExplanation';
 
 
-type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter';
+type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter' | 'btree';
 
 interface AlgorithmInfo {
     id: Algorithm;
@@ -152,6 +154,7 @@ const ALGORITHM_CATEGORIES: { [key: string]: AlgorithmInfo[] } = {
     { id: 'sstableflush', name: '💾 Flush para SSTable' },
     { id: 'lsmtree', name: '🌳 LSM-Tree Básica' },
     { id: 'bloomfilter', name: '🌸 Filtro de Bloom' },
+    { id: 'btree', name: '🌳 Estrutura de Nó de B-Tree' },
   ],
 };
 
@@ -204,6 +207,7 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'sstableflush' && <SSTableFlushVisualizer />}
         {algorithm === 'lsmtree' && <LSMTreeVisualizer />}
         {algorithm === 'bloomfilter' && <BloomFilterVisualizer />}
+        {algorithm === 'btree' && <BTreeVisualizer />}
       </div>
       <div className="lg:col-span-2">
         {algorithm === 'hanoi' && <Explanation />}
@@ -250,6 +254,7 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'sstableflush' && <SSTableFlushExplanation />}
         {algorithm === 'lsmtree' && <LSMTreeExplanation />}
         {algorithm === 'bloomfilter' && <BloomFilterExplanation />}
+        {algorithm === 'btree' && <BTreeExplanation />}
       </div>
     </div>
   );

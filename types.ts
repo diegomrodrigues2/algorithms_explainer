@@ -849,3 +849,24 @@ export interface BloomFilterAlgorithmStep {
     checkResult: boolean | null; // true for maybe, false for definitely not
     hashCalculations: { func: string, index: number }[];
 }
+
+// Types for B-Tree
+export interface BTreeNodeData {
+    id: string;
+    keys: number[];
+    childrenIds: string[];
+    isLeaf: boolean;
+    // visual props
+    x: number;
+    y: number;
+    // highlight props
+    keyHighlights?: { [index: number]: 'split-median' | 'new' | 'search-compare' | 'found' };
+    nodeHighlight?: 'full' | 'split-target' | 'new-node' | 'search-path' | 'current';
+}
+
+export interface BTreeAlgorithmStep {
+    nodes: { [id: string]: BTreeNodeData };
+    rootId: string | null;
+    message: string;
+    t: number;
+}
