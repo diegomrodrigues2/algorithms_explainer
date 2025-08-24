@@ -77,9 +77,21 @@ import StableMatchingVisualizer from './components/StableMatchingVisualizer';
 import StableMatchingExplanation from './components/StableMatchingExplanation';
 import AppendOnlyLogVisualizer from './components/AppendOnlyLogVisualizer';
 import AppendOnlyLogExplanation from './components/AppendOnlyLogExplanation';
+import BitcaskVisualizer from './components/BitcaskVisualizer';
+import BitcaskExplanation from './components/BitcaskExplanation';
+import LogCompactionVisualizer from './components/LogCompactionVisualizer';
+import LogCompactionExplanation from './components/LogCompactionExplanation';
+import MemtableVisualizer from './components/MemtableVisualizer';
+import MemtableExplanation from './components/MemtableExplanation';
+import SSTableFlushVisualizer from './components/SSTableFlushVisualizer';
+import SSTableFlushExplanation from './components/SSTableFlushExplanation';
+import LSMTreeVisualizer from './components/LSMTreeVisualizer';
+import LSMTreeExplanation from './components/LSMTreeExplanation';
+import BloomFilterVisualizer from './components/BloomFilterVisualizer';
+import BloomFilterExplanation from './components/BloomFilterExplanation';
 
 
-type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog';
+type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter';
 
 interface AlgorithmInfo {
     id: Algorithm;
@@ -134,6 +146,12 @@ const ALGORITHM_CATEGORIES: { [key: string]: AlgorithmInfo[] } = {
   ],
   'Algoritmos de Sistemas de Dados': [
     { id: 'appendonlylog', name: '📝 Log Append-Only Básico' },
+    { id: 'bitcask', name: '🔑 Índice de Hash em Memória' },
+    { id: 'logcompaction', name: '📦 Compactação de Log' },
+    { id: 'memtable', name: '💾 Memtable' },
+    { id: 'sstableflush', name: '💾 Flush para SSTable' },
+    { id: 'lsmtree', name: '🌳 LSM-Tree Básica' },
+    { id: 'bloomfilter', name: '🌸 Filtro de Bloom' },
   ],
 };
 
@@ -180,6 +198,12 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'huffmancodes' && <HuffmanCodeVisualizer />}
         {algorithm === 'stablematching' && <StableMatchingVisualizer />}
         {algorithm === 'appendonlylog' && <AppendOnlyLogVisualizer />}
+        {algorithm === 'bitcask' && <BitcaskVisualizer />}
+        {algorithm === 'logcompaction' && <LogCompactionVisualizer />}
+        {algorithm === 'memtable' && <MemtableVisualizer />}
+        {algorithm === 'sstableflush' && <SSTableFlushVisualizer />}
+        {algorithm === 'lsmtree' && <LSMTreeVisualizer />}
+        {algorithm === 'bloomfilter' && <BloomFilterVisualizer />}
       </div>
       <div className="lg:col-span-2">
         {algorithm === 'hanoi' && <Explanation />}
@@ -220,6 +244,12 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'huffmancodes' && <HuffmanCodeExplanation />}
         {algorithm === 'stablematching' && <StableMatchingExplanation />}
         {algorithm === 'appendonlylog' && <AppendOnlyLogExplanation />}
+        {algorithm === 'bitcask' && <BitcaskExplanation />}
+        {algorithm === 'logcompaction' && <LogCompactionExplanation />}
+        {algorithm === 'memtable' && <MemtableExplanation />}
+        {algorithm === 'sstableflush' && <SSTableFlushExplanation />}
+        {algorithm === 'lsmtree' && <LSMTreeExplanation />}
+        {algorithm === 'bloomfilter' && <BloomFilterExplanation />}
       </div>
     </div>
   );

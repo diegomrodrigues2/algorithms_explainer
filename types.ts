@@ -738,3 +738,114 @@ export interface AppendOnlyLogAlgorithmStep {
     operation: 'set' | 'get' | 'idle' | 'scan' | 'result';
     getResult: string | null;
 }
+
+// Types for Bitcask-like Hash Index
+export interface KeydirEntry {
+    offset: number;
+    size: number;
+}
+
+export interface LogEntry {
+    line: string;
+    offset: number;
+    size: number;
+}
+
+export interface BitcaskAlgorithmStep {
+    log: LogEntry[];
+    keydir: { [key: string]: KeydirEntry };
+    message: string;
+    highlights: {
+        logIndex?: number;
+        keydirKey?: string;
+    };
+    operation: 'set' | 'get' | 'rebuild' | 'idle' | 'result';
+    getResult: string | null;
+}
+
+// Types for Log Compaction
+export interface LogCompactionAlgorithmStep {
+    log: LogEntry[];
+    compactedLog: LogEntry[];
+    keydir: { [key: string]: KeydirEntry }; 
+    message: string;
+    highlights: {
+        logIndex?: number;
+        compactedLogIndex?: number;
+        keydirKey?: string;
+    };
+    phase: 'scanning' | 'writing' | 'swapping' | 'done' | 'idle';
+}
+
+// Types for Memtable
+export type MemtableHighlightType = 'low' | 'high' | 'mid' | 'found' | 'insert' | 'update';
+
+export interface MemtableAlgorithmStep {
+    keys: string[];
+    values: (string | null)[]; // null can represent a tombstone for deletion
+    message: string;
+    highlights: {
+        [index: number]: MemtableHighlightType;
+    };
+    operation: 'put' | 'get' | 'delete' | 'idle' | 'result';
+    getResult: string | null | undefined; // undefined means not found
+    searchState?: { low: number | null, high: number | null, mid: number | null };
+}
+
+// Types for SSTable Flush
+export interface SSTableFlushAlgorithmStep {
+    memtableKeys: string[];
+    memtableValues: (string | null)[];
+    sstableContent: { line: string; offset: number }[];
+    indexContent: { line: string }[];
+    message: string;
+    highlights: {
+        memtableIndex?: number;
+        sstableIndex?: number;
+        indexIndex?: number;
+    };
+    phase: 'idle' | 'writing' | 'done';
+}
+
+// Types for LSM-Tree
+export interface MemtableEntry {
+    key: string;
+    value: string | null; // null represents a tombstone
+}
+
+export interface SSTableSegment {
+    id: number;
+    entries: MemtableEntry[];
+}
+
+export interface LSMTreeAlgorithmStep {
+    memtable: MemtableEntry[];
+    segments: SSTableSegment[];
+    message: string;
+    highlights: {
+        memtableKey?: string;
+        segmentId?: number;
+        segmentKey?: string;
+        compactSourceIds?: number[];
+        compactTargetId?: number;
+    };
+    operation: 'put' | 'get' | 'flush' | 'compact' | 'idle' | 'result';
+    getResult: string | null | undefined; // undefined for not found
+}
+
+// Types for Bloom Filter
+export interface BloomFilterAlgorithmStep {
+    bitArray: (boolean | null)[];
+    m: number;
+    k: number;
+    n: number;
+    p: number;
+    message: string;
+    highlights: {
+        bits?: number[];
+    };
+    operation: 'add' | 'check' | 'idle' | 'result';
+    currentItem: string | null;
+    checkResult: boolean | null; // true for maybe, false for definitely not
+    hashCalculations: { func: string, index: number }[];
+}
