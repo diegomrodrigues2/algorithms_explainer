@@ -701,3 +701,40 @@ export interface HuffmanCodeAlgorithmStep {
     };
     codeGenerationPath: { symbol: string, code: string }[];
 }
+
+// Types for Stable Matching (Gale-Shapley)
+export type ProposerId = string;
+export type ReceiverId = string;
+
+export interface Engagements {
+  [receiverId: string]: ProposerId | null; // receiverId -> proposerId
+}
+
+export type StableMatchingHighlightType = 'proposing' | 'considering' | 'engaged' | 'rejected' | 'free';
+
+export interface StableMatchingStep {
+  proposers: { id: ProposerId; preferences: ReceiverId[] }[];
+  receivers: { id: ReceiverId; rankings: { [proposerId: ProposerId]: number } }[];
+  engagements: Engagements;
+  freeProposers: ProposerId[];
+  highlights: {
+    proposers: { [id: ProposerId]: StableMatchingHighlightType };
+    receivers: { [id: ReceiverId]: StableMatchingHighlightType };
+    proposalLine?: { from: ProposerId; to: ReceiverId; rejected?: boolean; success?: boolean };
+  };
+  message: string;
+}
+
+// Types for Append-Only Log
+export interface AppendOnlyLogAlgorithmStep {
+    log: string[];
+    currentState: { [key: string]: string };
+    message: string;
+    highlights: {
+        logIndex?: number;
+        foundKey?: string;
+        writtenKey?: string;
+    };
+    operation: 'set' | 'get' | 'idle' | 'scan' | 'result';
+    getResult: string | null;
+}

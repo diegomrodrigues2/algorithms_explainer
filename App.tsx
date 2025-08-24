@@ -73,9 +73,13 @@ import ActivitySelectionVisualizer from './components/ActivitySelectionVisualize
 import ActivitySelectionExplanation from './components/ActivitySelectionExplanation';
 import HuffmanCodeVisualizer from './components/HuffmanCodeVisualizer';
 import HuffmanCodeExplanation from './components/HuffmanCodeExplanation';
+import StableMatchingVisualizer from './components/StableMatchingVisualizer';
+import StableMatchingExplanation from './components/StableMatchingExplanation';
+import AppendOnlyLogVisualizer from './components/AppendOnlyLogVisualizer';
+import AppendOnlyLogExplanation from './components/AppendOnlyLogExplanation';
 
 
-type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes';
+type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog';
 
 interface AlgorithmInfo {
     id: Algorithm;
@@ -126,7 +130,11 @@ const ALGORITHM_CATEGORIES: { [key: string]: AlgorithmInfo[] } = {
   'Algoritmos Gulosos': [
     { id: 'activityselection', name: '⏱️ Escalonamento de Atividades' },
     { id: 'huffmancodes', name: '🗜️ Códigos de Huffman' },
-  ]
+    { id: 'stablematching', name: '💍 Emparelhamento Estável' },
+  ],
+  'Algoritmos de Sistemas de Dados': [
+    { id: 'appendonlylog', name: '📝 Log Append-Only Básico' },
+  ],
 };
 
 
@@ -170,6 +178,8 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'largestbstsubtree' && <LargestBSTSubtreeVisualizer />}
         {algorithm === 'activityselection' && <ActivitySelectionVisualizer />}
         {algorithm === 'huffmancodes' && <HuffmanCodeVisualizer />}
+        {algorithm === 'stablematching' && <StableMatchingVisualizer />}
+        {algorithm === 'appendonlylog' && <AppendOnlyLogVisualizer />}
       </div>
       <div className="lg:col-span-2">
         {algorithm === 'hanoi' && <Explanation />}
@@ -208,6 +218,8 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'largestbstsubtree' && <LargestBSTSubtreeExplanation />}
         {algorithm === 'activityselection' && <ActivitySelectionExplanation />}
         {algorithm === 'huffmancodes' && <HuffmanCodeExplanation />}
+        {algorithm === 'stablematching' && <StableMatchingExplanation />}
+        {algorithm === 'appendonlylog' && <AppendOnlyLogExplanation />}
       </div>
     </div>
   );
