@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import TowerOfHanoiVisualizer from './components/TowerOfHanoiVisualizer';
@@ -91,9 +92,15 @@ import BloomFilterVisualizer from './components/BloomFilterVisualizer';
 import BloomFilterExplanation from './components/BloomFilterExplanation';
 import BTreeVisualizer from './components/BTreeVisualizer';
 import BTreeExplanation from './components/BTreeExplanation';
+import BPlusTreeVisualizer from './components/BPlusTreeVisualizer';
+import BPlusTreeExplanation from './components/BPlusTreeExplanation';
+import WALVisualizer from './components/WALVisualizer';
+import WALExplanation from './components/WALExplanation';
+import RowToColumnVisualizer from './components/RowToColumnVisualizer';
+import RowToColumnExplanation from './components/RowToColumnExplanation';
 
 
-type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter' | 'btree';
+type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter' | 'btree' | 'bplustree' | 'wal' | 'rowtocolumn';
 
 interface AlgorithmInfo {
     id: Algorithm;
@@ -155,6 +162,9 @@ const ALGORITHM_CATEGORIES: { [key: string]: AlgorithmInfo[] } = {
     { id: 'lsmtree', name: '🌳 LSM-Tree Básica' },
     { id: 'bloomfilter', name: '🌸 Filtro de Bloom' },
     { id: 'btree', name: '🌳 Estrutura de Nó de B-Tree' },
+    { id: 'bplustree', name: '🌳 Consulta de Intervalo B+ Tree' },
+    { id: 'wal', name: '📜 Write-Ahead Log' },
+    { id: 'rowtocolumn', name: '↔️ Linha para Coluna' },
   ],
 };
 
@@ -208,6 +218,9 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'lsmtree' && <LSMTreeVisualizer />}
         {algorithm === 'bloomfilter' && <BloomFilterVisualizer />}
         {algorithm === 'btree' && <BTreeVisualizer />}
+        {algorithm === 'bplustree' && <BPlusTreeVisualizer />}
+        {algorithm === 'wal' && <WALVisualizer />}
+        {algorithm === 'rowtocolumn' && <RowToColumnVisualizer />}
       </div>
       <div className="lg:col-span-2">
         {algorithm === 'hanoi' && <Explanation />}
@@ -255,6 +268,9 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'lsmtree' && <LSMTreeExplanation />}
         {algorithm === 'bloomfilter' && <BloomFilterExplanation />}
         {algorithm === 'btree' && <BTreeExplanation />}
+        {algorithm === 'bplustree' && <BPlusTreeExplanation />}
+        {algorithm === 'wal' && <WALExplanation />}
+        {algorithm === 'rowtocolumn' && <RowToColumnExplanation />}
       </div>
     </div>
   );

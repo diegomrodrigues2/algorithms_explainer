@@ -1,3 +1,4 @@
+
 export type PegID = 'A' | 'B' | 'C';
 
 export interface Move {
@@ -869,4 +870,63 @@ export interface BTreeAlgorithmStep {
     rootId: string | null;
     message: string;
     t: number;
+}
+
+// Types for B+ Tree Range Query
+export interface BPlusTreeNodeData {
+    id: string;
+    keys: number[];
+    isLeaf: boolean;
+    // visual props
+    x: number;
+    y: number;
+    // pointers
+    childrenIds?: string[]; // For internal nodes
+    values?: string[];    // For leaf nodes
+    nextId?: string | null; // For leaf nodes
+    // highlight props
+    keyHighlights?: { [index: number]: 'compare' | 'in-range' | 'out-of-range' };
+    nodeHighlight?: 'search-path' | 'current-scan' | 'found-start' | 'next-link';
+}
+
+export interface BPlusTreeAlgorithmStep {
+    nodes: { [id: string]: BPlusTreeNodeData };
+    rootId: string | null;
+    message: string;
+    startKey: number | null;
+    endKey: number | null;
+    result: { key: number, value: string }[];
+}
+
+
+// Types for Write-Ahead Log (WAL)
+export interface WALRecord {
+    lsn: number;
+    op: 'insert';
+    key: number;
+}
+
+export interface WALAlgorithmStep {
+    wal: WALRecord[];
+    btreeNodes: { [id: string]: BTreeNodeData };
+    btreeRootId: string | null;
+    message: string;
+    highlights: {
+        walIndex?: number;
+    };
+    phase: 'idle' | 'logging' | 'applying' | 'recovery_read' | 'recovery_apply';
+}
+
+// Types for Row to Column Conversion
+export interface RowToColumnAlgorithmStep {
+    rows: { [key: string]: any }[];
+    columns: { [key: string]: any[] };
+    schema: string[];
+    message: string;
+    highlights: {
+        rowIndex?: number;
+        colKey?: string;
+        cellKey?: string; // for a specific cell: (row_index, col_key)
+        phase: 'discover' | 'populate' | 'done' | 'idle';
+    };
 }
