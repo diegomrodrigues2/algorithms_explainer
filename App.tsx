@@ -98,9 +98,13 @@ import WALVisualizer from './components/WALVisualizer';
 import WALExplanation from './components/WALExplanation';
 import RowToColumnVisualizer from './components/RowToColumnVisualizer';
 import RowToColumnExplanation from './components/RowToColumnExplanation';
+import RLEVisualizer from './components/RLEVisualizer';
+import RLEExplanation from './components/RLEExplanation';
+import BinaryEncodingVisualizer from './components/BinaryEncodingVisualizer';
+import BinaryEncodingExplanation from './components/BinaryEncodingExplanation';
 
 
-type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter' | 'btree' | 'bplustree' | 'wal' | 'rowtocolumn';
+type Algorithm = 'hanoi' | 'inversions' | 'quickselect' | 'bfprt' | 'minmax' | 'nqueens' | 'subsetsum' | 'textsegmentation' | 'lis' | 'obst' | 'subsetgen' | 'permutations' | 'graphcoloring' | 'hamiltonianpath' | 'subsetsummemo' | 'textsegmentationmemo' | 'lismemo' | 'editdistance' | 'fibonaccimemo' | 'fibonaccitab' | 'subsetsumtab' | 'listabulated' | 'editdistancetab' | 'obsttab' | 'lcstabulated' | 'scstabulated' | 'knapsacktabulated' | 'coinchange' | 'palindromepartitioning' | 'mistree' | 'mvctree' | 'diametertree' | 'mincosttreecoloring' | 'largestbstsubtree' | 'activityselection' | 'huffmancodes' | 'stablematching' | 'appendonlylog' | 'bitcask' | 'logcompaction' | 'memtable' | 'sstableflush' | 'lsmtree' | 'bloomfilter' | 'btree' | 'bplustree' | 'wal' | 'rowtocolumn' | 'rle' | 'binaryencoding';
 
 interface AlgorithmInfo {
     id: Algorithm;
@@ -165,6 +169,8 @@ const ALGORITHM_CATEGORIES: { [key: string]: AlgorithmInfo[] } = {
     { id: 'bplustree', name: '🌳 Consulta de Intervalo B+ Tree' },
     { id: 'wal', name: '📜 Write-Ahead Log' },
     { id: 'rowtocolumn', name: '↔️ Linha para Coluna' },
+    { id: 'rle', name: '🔄 Compressão RLE' },
+    { id: 'binaryencoding', name: '📦 Codificador Binário' },
   ],
 };
 
@@ -221,6 +227,8 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'bplustree' && <BPlusTreeVisualizer />}
         {algorithm === 'wal' && <WALVisualizer />}
         {algorithm === 'rowtocolumn' && <RowToColumnVisualizer />}
+        {algorithm === 'rle' && <RLEVisualizer />}
+        {algorithm === 'binaryencoding' && <BinaryEncodingVisualizer />}
       </div>
       <div className="lg:col-span-2">
         {algorithm === 'hanoi' && <Explanation />}
@@ -271,6 +279,8 @@ const AlgorithmVisualizer = ({ algorithm }: { algorithm: Algorithm }) => {
         {algorithm === 'bplustree' && <BPlusTreeExplanation />}
         {algorithm === 'wal' && <WALExplanation />}
         {algorithm === 'rowtocolumn' && <RowToColumnExplanation />}
+        {algorithm === 'rle' && <RLEExplanation />}
+        {algorithm === 'binaryencoding' && <BinaryEncodingExplanation />}
       </div>
     </div>
   );

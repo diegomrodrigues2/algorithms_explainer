@@ -930,3 +930,34 @@ export interface RowToColumnAlgorithmStep {
         phase: 'discover' | 'populate' | 'done' | 'idle';
     };
 }
+
+// Types for Run-Length Encoding (RLE)
+export interface RLEAlgorithmStep {
+    sequence: string[];
+    compressed: [string, number][];
+    message: string;
+    highlights: {
+        readIndex?: number;
+        runStartIndex?: number;
+        outputIndex?: number;
+    };
+    currentRun: {
+        value: string | null;
+        count: number;
+    };
+}
+
+// Types for Binary Encoding
+export interface BinaryEncodingStep {
+    phase: 'idle' | 'encoding' | 'decoding' | 'done';
+    input: { userId: number; name: string } | null;
+    encodedBytes: number[] | null;
+    decodedObject: { [key: string]: any } | null;
+    message: string;
+    highlights: {
+        inputKey?: 'userId' | 'name';
+        byteRange?: [number, number]; // start index (inclusive), end index (exclusive)
+        decodedKey?: string;
+        partName?: string; // e.g., "Tag for user_id", "Varint value for user_id"
+    };
+}
